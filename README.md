@@ -55,17 +55,17 @@ To replicate the environment:
 ```text
 TurkLexBench/
 ├── data/
-│   ├── TurkVerdict/       # JSONL files for verdict prediction
-│   ├── TurkVenue/         # JSONL files for chamber classification
-│   ├── TurkCanon/         # Legislative classification
-│   ├── TurkChronos/       # Year prediction
-│   ├── TurkCite/          # NER data (BIO format)
-│   ├── TurkCoherence/     # NLI pairs
-│   └── TurkAudit/         # Hallucination detection
-├── models/                # Fine-tuning scripts
-├── notebooks/             # Analysis notebooks
-├── requirements.txt       # Dependencies
-└── LICENSE                # CC BY-NC-SA 4.0
+│   ├── TurkVerdict/      
+│   ├── TurkVenue/         
+│   ├── TurkCanon/        
+│   ├── TurkChronos/       
+│   ├── TurkCite/          
+│   ├── TurkCoherence/     
+│   └── TurkAudit/        
+├── models/                
+├── notebooks/            
+├── requirements.txt       
+└── LICENSE                
 ```
 
 
