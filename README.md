@@ -1,9 +1,10 @@
-# ⚖️ TurkLexBench: A Comprehensive Multi-Task Benchmark Suite for Turkish Legal NLP
+# ⚖️ TurkishLegalBench: A Comprehensive Multi-Task Benchmark Suite for Turkish Legal NLP
 
 > [!WARNING]
 > **Under Review:** This repository contains the official dataset and codebase for the paper **"TurkLexBench: A Comprehensive Multi-Task Benchmark Suite for Turkish Legal NLP"**, currently under review for **KDD 2026 (Datasets & Benchmarks Track)**. 
 > While the data is open for reproducibility, please cite the work if you use it.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18555735.svg)](https://doi.org/10.5281/zenodo.18555735)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 
@@ -40,9 +41,16 @@ We organize the benchmark into three pillars representing different levels of le
 
 ---
 
-## 📂 Repository Structure
 
-The data is provided in **JSONL** format, pre-split to ensure reproducibility.
+## 📂 Dataset Access (Zenodo)
+
+Due to GitHub's file size limitations, the full dataset is hosted on **Zenodo** for long-term archival and reproducibility. 
+
+**Download Link:** [https://doi.org/10.5281/zenodo.18555735](https://doi.org/10.5281/zenodo.18555735)
+
+To replicate the environment:
+1. Download the task-specific `.zip` files from Zenodo.
+2. Extract them into the `data/` directory of this repository following the structure below.
 
 ```text
 TurkLexBench/
@@ -75,11 +83,10 @@ You can easily load the data using the datasets library or standard JSON lines:
 
 ```bash
 import json
-# Load Train Set for TurkVerdict
 with open('data/TurkVerdict/train.jsonl', 'r', encoding='utf-8') as f:
     for line in f:
         data = json.loads(line)
-        print(data['text'], data['label'])
+        print(f"Text: {data['text'][:100]}... | Outcome: {data['outcome']}")
 ```
 
 ## 📊 Benchmark Results
@@ -105,7 +112,6 @@ We evaluated baseline and domain-adapted models across all 7 tasks using the **T
 
 This dataset and benchmark suite are distributed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)** license.
 
-
 ### Under this license, you are free to:
 * **Share** — copy and redistribute the material in any medium or format.
 * **Adapt** — remix, transform, and build upon the material.
@@ -130,6 +136,8 @@ If you use **TurkLexBench** (data, code, or models) in your research, please cit
   booktitle={Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '26)},
   year={2026},
   publisher={ACM},
+  doi={10.5281/zenodo.18555735},
+  url={https://doi.org/10.5281/zenodo.18555735},
   note={Under Review}
 }
 ```
