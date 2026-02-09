@@ -105,7 +105,6 @@ We evaluated baseline and domain-adapted models across all 7 tasks using the **T
 
 This dataset and benchmark suite are distributed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)** license.
 
-[Image of Creative Commons License logo]
 
 ### Under this license, you are free to:
 * **Share** — copy and redistribute the material in any medium or format.
@@ -120,6 +119,20 @@ This dataset and benchmark suite are distributed under the **Creative Commons At
 
 ---
 
+## 🖊️ Citation
+
+If you use **TurkLexBench** (data, code, or models) in your research, please cite our paper:
+
+```bibtex
+@inproceedings{erkan2026turklexbench,
+  title={TurkLexBench: A Comprehensive Multi-Task Benchmark Suite for Turkish Legal NLP},
+  author={Erkan, Mehmet Ali and Yozgatlıgil, Ceylan},
+  booktitle={Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '26)},
+  year={2026},
+  publisher={ACM},
+  note={Under Review}
+}
+```
 
 ## 📧 Contact
 For questions, feedback, or collaboration opportunities, please contact:
