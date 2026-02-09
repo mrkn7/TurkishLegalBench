@@ -1,0 +1,18 @@
+# Data Manipulation & Analysis
+pandas
+numpy
+tqdm
+
+# Machine Learning (Baselines & Metrics)
+scikit-learn
+joblib
+
+# Deep Learning & NLP (Transformers, BERTurk, Longformer)
+torch
+transformers
+datasets
+evaluate
+accelerate
+
+# System Utilities
+pathlib
