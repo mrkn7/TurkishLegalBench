@@ -10,7 +10,7 @@
 
 ## 📖 Overview
 
-**TurkLexBench** is the first large-scale, open-source legal NLP benchmark for the Turkish language. It comprises **38,009 authentic legal documents** sourced from high courts (Yargıtay, Danıştay) and the Official Gazette (Resmi Gazete).
+**TurkishLegalBench** is the first large-scale, open-source legal NLP benchmark for the Turkish language. It comprises **38,009 authentic legal documents** sourced from high courts (Yargıtay, Danıştay) and the Official Gazette (Resmi Gazete).
 
 The benchmark covers **7 distinct tasks** organized into three cognitive pillars, designed to evaluate models on structural understanding, information extraction, and logical reasoning.
 
