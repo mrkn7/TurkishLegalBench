@@ -1,9 +1,5 @@
 # ⚖️ TurkishLegalBench: A Comprehensive Multi-Task Benchmark Suite for Turkish Legal NLP
 
-> [!WARNING]
-> **Under Review:** This repository contains the official dataset and codebase for the paper **"TurkLexBench: A Comprehensive Multi-Task Benchmark Suite for Turkish Legal NLP"**, currently under review for **KDD 2026 (Datasets & Benchmarks Track)**. 
-> While the data is open for reproducibility, please cite the work if you use it.
-
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18555735.svg)](https://doi.org/10.5281/zenodo.18555735)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
@@ -24,8 +20,8 @@ We organize the benchmark into three pillars representing different levels of le
 | Task | Description | Metric | Size (Train/Dev/Test) |
 | :--- | :--- | :--- | :--- |
 | **TurkVerdict** | Predict the judgment outcome (e.g., Affirmation, Reversal) from the case rationale. | Macro-F1 | 18k / 2.2k / 2.2k |
-| **TurkVenue** | Identify the competent court chamber (Daire) based on case facts (36 classes). | Macro-F1 | 19.2k / 2.7k / 5.5k |
-| **TurkCanon** | Classify legislative documents into types (Law, Regulation, Decree, etc.). | Macro-F1 | 6.3k / 0.9k / 1.8k |
+| **TurkVenue** | Identify the competent court chamber (Daire) based on case facts (36 classes). | Macro-F1 | 17.7k / 2.5k / 5.0k |
+| **TurkCanon** | Classify legislative documents into types (Law, Regulation, Decree, etc.). | Macro-F1 | 6.4k / 0.9k / 1.8k |
 
 ### II. The Quill (Information Extraction)
 | Task | Description | Metric | Size (Train/Dev/Test) |
@@ -91,21 +87,23 @@ with open('data/TurkVerdict/train.jsonl', 'r', encoding='utf-8') as f:
 
 ## 📊 Benchmark Results
 
-We evaluated baseline and domain-adapted models across all 7 tasks using the **Test Set**. The table below reports the primary metric for each task (Macro-F1 for classification, Accuracy for Chronos, and Entity-F1 for NER).
+We evaluated baseline and domain-adapted models across all 7 tasks using the **Test Set**. The table below reports the primary metric for each task: Macro-F1 for classification tasks, Accuracy for Chronos, Entity-F1 for Cite, and Weighted-F1 for Audit.
 
-| Model | Verdict <br> *(m-F1)* | Venue <br> *(m-F1)* | Canon <br> *(m-F1)* | Chronos <br> *(Acc)* | Cite <br> *(F1)* | Coherence <br> *(m-F1)* | Audit <br> *(W-F1)* |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **TFIDF-SVM** | 68.4 | 41.7 | 35.8 | 56.0 | 76.4 | - | 87.6 |
-| **BERTurk** | 81.9 | 79.4 | 92.6 | **94.1** 🏆 | 95.5 | **56.8** 🏆 | 96.9 |
-| **Legal-BERT (Eng)** | 68.1 | 63.1 | 91.1 | 92.3 | 95.5 | 50.1 | 95.1 |
-| **XLM-RoBERTa** | 79.2 | 64.4 | 70.4 | 70.2 | 95.4 | 33.7 | 96.6 |
-| **Longformer** | 69.3 | 59.9 | 92.6 | 93.7 | 94.5 | 43.9 | **98.5** 🏆 |
-| **BERT-TR-128k** | **82.6** 🏆 | **82.2** 🏆 | **93.8** 🏆 | 94.0 | **96.0** 🏆 | 50.4 | 97.6 |
+| Model                | Verdict <br> *(m-F1)* | Venue <br> *(m-F1)* | Canon <br> *(m-F1)* | Chronos <br> *(Acc)* | Cite <br> *(F1)* | Coherence <br> *(m-F1)* | Audit <br> *(W-F1)* |
+| :------------------- | :-------------------: | :-----------------: | :-----------------: | :------------------: | :--------------: | :---------------------: | :-----------------: |
+| **BERTurk**          |          75.3         |     **82.0** 🏆     |     **92.9** 🏆     |         88.8         |       45.8       |           53.1          |         97.4        |
+| **Legal-BERT (Eng)** |          68.8         |         62.9        |         92.2        |         90.0         |       37.5       |           45.9          |         95.8        |
+| **XLM-RoBERTa**      |          72.0         |         64.0        |         52.5        |         84.9         |       41.9       |           33.0          |         96.8        |
+| **DistilBERT-TR**    |          70.6         |         62.5        |         87.1        |         82.6         |       41.6       |           33.2          |         97.4        |
+| **Longformer**       |          70.1         |         62.1        |         91.6        |         83.7         |    **58.4** 🏆   |           33.0          |         97.0        |
+| **BERT-TR-128k**     |      **79.4** 🏆      |         81.1        |         92.6        |      **92.0** 🏆     |       49.3       |       **64.3** 🏆       |     **98.3** 🏆     |
 
 > **🏆 Key Takeaways:**
-> * **Vocabulary Matters:** The **BERT-TR-128k** model (with expanded vocabulary) achieves State-of-the-Art (SOTA) in 4 out of 7 tasks, significantly outperforming standard BERTurk in extraction and rare-class classification tasks.
-> * **Context is King for Auditing:** **Longformer** dominates the *TurkAudit* task (%98.5), proving that large context windows are essential for "needle-in-a-haystack" retrieval tasks where the anomaly appears late in the document.
-> * **Reasoning Gap:** All models struggle with the *TurkCoherence* (NLI) task, indicating that current LLMs are better at surface-level pattern matching than deep legal logical entailment.
+>
+> * **Expanded Turkish Vocabulary Improves Overall Performance:** The **BERT-TR-128k** model achieves the best score in **4 out of 7 tasks**: Verdict, Chronos, Coherence, and Audit. This shows that expanding the Turkish vocabulary provides consistent gains, especially in decision classification, temporal reasoning, logical coherence, and audit-style detection.
+> * **BERTurk Remains Strong for Core Legal Classification:** Standard **BERTurk** achieves the best performance on **Venue** and **Canon**, indicating that a strong Turkish encoder is still highly competitive for structured legal classification tasks.
+> * **Long Context Helps Citation Extraction:** **Longformer** achieves the highest score on the **Cite** task, suggesting that longer context windows are particularly useful when citation-related evidence may appear in different parts of the document.
+> * **Coherence Remains Challenging:** Although **BERT-TR-128k** substantially improves TurkCoherence performance, the task remains more difficult than surface-level classification tasks. This suggests that legal entailment and logical consistency still require deeper reasoning beyond lexical or structural pattern matching.
 
 
 ## 📜 License
@@ -125,22 +123,6 @@ This dataset and benchmark suite are distributed under the **Creative Commons At
 
 ---
 
-## 🖊️ Citation
-
-If you use **TurkLexBench** (data, code, or models) in your research, please cite our paper:
-
-```bibtex
-@inproceedings{erkan2026turklexbench,
-  title={TurkLexBench: A Comprehensive Multi-Task Benchmark Suite for Turkish Legal NLP},
-  author={Erkan, Mehmet Ali and Yozgatlıgil, Ceylan},
-  booktitle={Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '26)},
-  year={2026},
-  publisher={ACM},
-  doi={10.5281/zenodo.18555735},
-  url={https://doi.org/10.5281/zenodo.18555735},
-  note={Under Review}
-}
-```
 
 ## 📧 Contact
 For questions, feedback, or collaboration opportunities, please contact:
